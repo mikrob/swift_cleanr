@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	config = flag.String("c", "./config.yml", "absolute path to the yaml config file for openstack")
+	config    = flag.String("f", "./config.yml", "absolute path to the yaml config file for openstack")
+	container = flag.String("c", "screencapture-staging", "name of container to clean")
 )
 
 func main() {
@@ -50,4 +51,20 @@ func main() {
 	// List all the containers
 	containers, err := c.ContainerNames(nil)
 	fmt.Println(containers)
+	swiftContainer, _, errContainer := c.Container(*container)
+
+	fmt.Println("Count : ")
+	fmt.Println(swiftContainer.Count)
+
+	if errContainer != nil {
+		fmt.Println("Cannont retrieve container ", *container)
+	}
+	files, errNames := c.ObjectNames(*container, nil)
+	if errNames != nil {
+		panic("Cannot list container " + *container)
+	}
+
+	fmt.Println("Starting delete")
+	c.BulkDelete(*container, files)
+	fmt.Println("Delete done")
 }
