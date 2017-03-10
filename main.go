@@ -10,13 +10,14 @@ import (
 )
 
 var (
-	kubeconfig = flag.String("c", "./config.yml", "absolute path to the yaml config file for openstack")
+	config = flag.String("c", "./config.yml", "absolute path to the yaml config file for openstack")
 )
 
 func main() {
+
 	viper.SetConfigType("yaml")
 
-	data, err := ioutil.ReadFile("config.yml")
+	data, err := ioutil.ReadFile(*config)
 	if err != nil {
 		panic("Cannot read config")
 	}
@@ -26,6 +27,7 @@ func main() {
 	if viper.Get("openstack") == nil {
 		panic("Cannot found openstack in config")
 	}
+
 	username := viper.GetString("openstack.username")
 	api_key := viper.GetString("openstack.api_key")
 	auth_url := viper.GetString("openstack.auth_url")
