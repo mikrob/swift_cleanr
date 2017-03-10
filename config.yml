@@ -1,0 +1,6 @@
+openstack:
+  username: "TfJaZsM3DXDy"
+  api_key: "uSBHcRe2Z6QbEaas45Vhfc2AwyWuT6dM"
+  auth_url: "https://auth.cloud.ovh.net/v2.0/"
+  authtenant_name: "2170778012452740"
+  region: "SBG1"
