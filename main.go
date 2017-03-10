@@ -37,9 +37,8 @@ func main() {
 		UserName: username,
 		ApiKey:   api_key,
 		AuthUrl:  auth_url,
-		//Domain:   "domain", // Name of the domain (v3 auth only)
-		Tenant: authtenant_name, // Name of the tenant (v2 auth only)
-		Region: region,
+		Tenant:   authtenant_name, // Name of the tenant (v2 auth only)
+		Region:   region,
 	}
 	// Authenticate
 	errAuth := c.Authenticate()
